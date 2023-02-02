@@ -1,0 +1,44 @@
+name: Make TWRP Device
+
+on:
+  workflow_dispatch:
+    inputs:
+      RELEASE_FILE:
+        description: Release file name of your image
+        required: true
+      RELEASE_TAG:
+        description: Release tag
+        required: false
+        default: image
+      OUTPUT_PATH:
+        description: Output device tree path
+        required: false
+        default: dt
+
+jobs:
+  build:
+    if: github.event.repository.owner.id == github.event.sender.id
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check Out
+      uses: actions/checkout@v3
+
+    - name: Download boot or recovery image
+      uses: robinraju/release-downloader@v1.7
+      with:
+        tag: ${{ github.event.inputs.RELEASE_TAG }}
+        fileName: ${{ github.event.inputs.RELEASE_FILE }}
+        out-file-path: ./
+    - name: Check downloaded images
+      run: |
+        ls -alh *.img
+    - name: Start building
+      uses: ./.github/actions/build-device-tree
+      with:
+        image-path: ${{ github.event.inputs.RELEASE_FILE }}
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        path: dt/
+        name: TWRP_Device_Tree-${{ github.run_id }}

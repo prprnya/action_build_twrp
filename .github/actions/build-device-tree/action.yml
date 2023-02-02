@@ -1,0 +1,20 @@
+name: Build DT
+description: Build device tree using special image
+
+inputs:
+  image-path:
+    description: Path of your images
+    required: true
+    default: build.img
+  output-path:
+    description: Path of output device tree files
+    required: false
+    default: dt
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.image-path }}
+    - '-o'
+    - ${{ inputs.output-path }}
