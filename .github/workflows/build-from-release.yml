@@ -9,7 +9,7 @@ on:
       RELEASE_TAG:
         description: Release tag
         required: false
-        default: image
+        default: images
       OUTPUT_PATH:
         description: Output device tree path
         required: false
