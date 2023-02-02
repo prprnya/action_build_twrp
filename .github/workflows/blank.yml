@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       IMG_URL:    
-        description: 'IMG_URL'
+        description: 'URL of your `boot.img`'
         required: true
         default: ''
 
 jobs:
   build:
     if: github.event.repository.owner.id == github.event.sender.id
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     
     steps:
     - name: Check Out
@@ -20,8 +20,8 @@ jobs:
     - name: Prepare the environment
       run: |
         sudo apt update
-        sudo apt -y install python python3 python-pip python3-pip cpio wget
-        pip3 install twrpdtgen
+        sudo apt -y install python python-pip cpio wget
+        pip install twrpdtgen
         mkdir dt
       
     - name: Download boot or recovery img
@@ -31,17 +31,9 @@ jobs:
       
     - name: Start build
       run: |
-        python3 -m twrpdtgen -o dt/ *.img
-    - name: ZIP device tree
-      run: |
-        zip -r DeviceTree.zip ./dt
-    - name: Upload to Release
-      uses: softprops/action-gh-release@v1
+        python -m twrpdtgen -o dt/ *.img
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3
       with:
-        files: |
-          ./DeviceTree.zip
+        path: dt/
         name: TWRP_Device_Tree-${{ github.run_id }}
-        tag_name: ${{ github.run_id }}
-        body: DeviceTree for twrp
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
