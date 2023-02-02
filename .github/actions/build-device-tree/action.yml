@@ -5,11 +5,9 @@ inputs:
   image-path:
     description: Path of your images
     required: true
-    default: build.img
   output-path:
     description: Path of output device tree files
-    required: false
-    default: dt
+    required: true
 
 runs:
   using: docker
