@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       IMG_URL:    
-        description: 'URL of your image'
+        description: 'Direct URL of your image'
         required: true
         default: ''
 
