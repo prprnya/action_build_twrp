@@ -1,4 +1,4 @@
-name: Make TWRP Device
+name: Make TWRP Device from URL
 
 on:
   workflow_dispatch:

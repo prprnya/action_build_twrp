@@ -1,4 +1,4 @@
-name: Make TWRP Device
+name: Make TWRP Device from Release
 
 on:
   workflow_dispatch:
