@@ -11,4 +11,3 @@ runs:
   image: Dockerfile
   args:
     - ${{ inputs.image-path }}
-
