@@ -1,4 +1,4 @@
-name: Build DT
+name: Build Device Tree
 description: Build device tree using special image
 
 inputs:
