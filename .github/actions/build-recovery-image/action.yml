@@ -1,5 +1,5 @@
 name: Build Recovery Image
-description: ''
+description: Build recovery image from device tree
 
 inputs:
   device-name:

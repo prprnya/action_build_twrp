@@ -3,7 +3,7 @@ description: Build device tree using special image
 
 inputs:
   image-path:
-    description: Path of your images
+    description: ''
     required: true
 
 runs:
