@@ -1,0 +1,13 @@
+name: Build Recovery Image
+description: ''
+
+inputs:
+  device-name:
+    description: ''
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.device-name }}
