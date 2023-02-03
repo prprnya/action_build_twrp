@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       RELEASE_FILE:
-        description: Release file name of your image
+        description: RELEASE_FILE (Release file name of your image)
         required: true
       DEVICE_NAME:
-        description: Name of Device
+        description: DEVICE_NAME (Name of your device)
         required: true
       RELEASE_TAG:
-        description: Release tag
+        description: RELEASE_TAG (Optional, DO NOT accept pre-release)
         required: false
         default: images
       OUTPUT_PATH:

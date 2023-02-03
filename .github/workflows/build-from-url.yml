@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       IMAGE_URL:
-        description: Direct URL of your image
+        description: IMAGE_URL (Direct URL of your image)
         required: true
       OUTPUT_PATH:
         description: Output device tree path
