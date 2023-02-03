@@ -5,14 +5,10 @@ inputs:
   image-path:
     description: Path of your images
     required: true
-  output-path:
-    description: Path of output device tree files
-    required: true
 
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.image-path }}
-    - '-o'
-    - ${{ inputs.output-path }}
+

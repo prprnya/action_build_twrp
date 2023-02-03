@@ -13,10 +13,6 @@ on:
         description: RELEASE_TAG (Optional, DO NOT accept pre-release)
         required: false
         default: images
-      OUTPUT_PATH:
-        description: Output device tree path
-        required: false
-        default: dt
 
 jobs:
   device-tree:
@@ -38,11 +34,10 @@ jobs:
       uses: ./.github/actions/build-device-tree
       with:
         image-path: ${{ github.event.inputs.RELEASE_FILE }}
-        output-path: ${{ github.event.inputs.OUTPUT_PATH }}
     - name: Upload Device Tree
       uses: actions/upload-artifact@v3
       with:
-        path: ${{ github.event.inputs.OUTPUT_PATH }}
+        path: output
         name: TWRP_Device_Tree-${{ github.run_id }}
 
   recovery-image:
