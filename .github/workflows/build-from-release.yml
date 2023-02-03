@@ -1,4 +1,4 @@
-name: Make TWRP Device from Release
+name: Build TWRP from Release
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ on:
         default: dt
 
 jobs:
-  build:
+  device-tree:
     if: github.event.repository.owner.id == github.event.sender.id
     runs-on: ubuntu-latest
 

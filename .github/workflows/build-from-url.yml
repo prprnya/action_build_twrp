@@ -1,4 +1,4 @@
-name: Make TWRP Device from URL
+name: Build TWRP from URL
 
 on:
   workflow_dispatch:
@@ -12,8 +12,7 @@ on:
         default: dt
 
 jobs:
-  build:
-    if: github.event.repository.owner.id == github.event.sender.id
+  device-tree:
     runs-on: ubuntu-latest
 
     steps:
