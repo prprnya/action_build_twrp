@@ -1,6 +1,6 @@
 #!/bin/sh
 
-repo init --depth=1 -u https://github.com/omnirom/android.git -b android-13.0
+repo init --depth=1 -u $2 -b $3
 repo sync
 
 source build/envsetup.sh

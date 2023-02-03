@@ -6,13 +6,21 @@ on:
       RELEASE_FILE:
         description: RELEASE_FILE (Release file name of your image)
         required: true
-      DEVICE_NAME:
-        description: DEVICE_NAME (Name of your device)
-        required: true
       RELEASE_TAG:
         description: RELEASE_TAG (Optional, DO NOT accept pre-release)
         required: false
         default: images
+      DEVICE_NAME:
+        description: DEVICE_NAME (Name of your device)
+        required: true
+      MANIFEST_REPO:
+        description: 'MANIFEST_REPO'
+        required: true
+        default: https://github.com/prprnya/omnirom-android-manifest.git
+      MANIFEST_BRANCH:
+        description: 'MANIFEST_BRANCH'
+        required: true
+        default: android-13.0
 
 jobs:
   device-tree:
@@ -58,6 +66,8 @@ jobs:
       uses: ./.github/actions/build-recovery-image
       with:
         device-name: ${{ github.event.inputs.DEVICE_NAME }}
+        manifest-repo: ${{ github.event.inputs.MANIFEST_REPO }}
+        manifest-branch: ${{ github.event.inputs.MANIFEST_BRANCH }}
     - name: Upload recovery image
       uses: actions/upload-artifact@v3
       with:

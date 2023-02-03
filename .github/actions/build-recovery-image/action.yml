@@ -5,9 +5,17 @@ inputs:
   device-name:
     description: ''
     required: true
+  manifest-repo:
+    description: ''
+    required: true
+  manifest-branch:
+    description: ''
+    required: true
 
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.device-name }}
+    - ${{ inputs.manifest-repo }}
+    - ${{ inputs.manifest-branch }}
