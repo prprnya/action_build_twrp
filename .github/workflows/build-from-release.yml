@@ -59,11 +59,11 @@ jobs:
     - name: Check Device Tree
       run: |
         ls -R device/
-    - name: Build TWRP
+    - name: Build recovery image
       uses: ./.github/actions/build-recovery-image
       with:
         device-name: ${{ github.event.inputs.DEVICE_NAME }}
-    - name: Upload Recovery Image
+    - name: Upload recovery image
       uses: actions/upload-artifact@v3
       with:
         path: out/target/product/${{ github.event.inputs.DEVICE_NAME }}
