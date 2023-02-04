@@ -10,6 +10,10 @@ on:
         description: RELEASE_TAG (Optional, DO NOT accept pre-release)
         required: false
         default: images
+      RUNS_ON:
+        description: RUNS_ON (Optional, runner on TWRP building step)
+        required: false
+        default: ubuntu-latest
       DEVICE_NAME:
         description: DEVICE_NAME (Name of your device)
         required: true
@@ -50,7 +54,7 @@ jobs:
 
   recovery-image:
     needs: device-tree
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.RUNS_ON }}
 
     steps:
       - uses: actions/checkout@v3
