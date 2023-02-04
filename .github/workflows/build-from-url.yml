@@ -12,20 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Download boot or recovery image
-      run: |
-        curl -L "${{ github.event.inputs.IMAGE_URL }}" -o build.img
-    - name: Check downloaded images
-      run: |
-        ls -alh *.img
-    - name: Start building
-      id: build
-      uses: ./.github/actions/build-device-tree
-      with:
-        image-path: build.img
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        path: output
-        name: TWRP_Device_Tree-${{ github.run_id }}
+      - uses: actions/checkout@v3
+      - name: Download boot or recovery image
+        run: |
+          curl -L "${{ github.event.inputs.IMAGE_URL }}" -o build.img
+      - name: Check downloaded images
+        run: |
+          ls -alh *.img
+      - name: Start building
+        id: build
+        uses: ./.github/actions/build-device-tree
+        with:
+          image-path: build.img
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: output
+          name: TWRP_Device_Tree-${{ github.run_id }}

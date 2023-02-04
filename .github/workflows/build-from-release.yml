@@ -28,48 +28,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Download boot or recovery image
-      uses: robinraju/release-downloader@v1.7
-      with:
-        tag: ${{ github.event.inputs.RELEASE_TAG }}
-        fileName: ${{ github.event.inputs.RELEASE_FILE }}
-        out-file-path: ./
-    - name: Check downloaded images
-      run: |
-        ls -alh *.img
-    - name: Start building
-      uses: ./.github/actions/build-device-tree
-      with:
-        image-path: ${{ github.event.inputs.RELEASE_FILE }}
-    - name: Upload Device Tree
-      uses: actions/upload-artifact@v3
-      with:
-        path: output
-        name: TWRP_Device_Tree-${{ github.run_id }}
+      - uses: actions/checkout@v3
+      - name: Download boot or recovery image
+        uses: robinraju/release-downloader@v1.7
+        with:
+          tag: ${{ github.event.inputs.RELEASE_TAG }}
+          fileName: ${{ github.event.inputs.RELEASE_FILE }}
+          out-file-path: ./
+      - name: Check downloaded images
+        run: |
+          ls -alh *.img
+      - name: Start building
+        uses: ./.github/actions/build-device-tree
+        with:
+          image-path: ${{ github.event.inputs.RELEASE_FILE }}
+      - name: Upload Device Tree
+        uses: actions/upload-artifact@v3
+        with:
+          path: output
+          name: TWRP_Device_Tree-${{ github.run_id }}
 
   recovery-image:
     needs: device-tree
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Download Device Tree
-      uses: actions/download-artifact@v3
-      with:
-        name: TWRP_Device_Tree-${{ github.run_id }}
-        path: device
-    - name: Check Device Tree
-      run: |
-        ls -R device/
-    - name: Build recovery image
-      uses: ./.github/actions/build-recovery-image
-      with:
-        device-name: ${{ github.event.inputs.DEVICE_NAME }}
-        manifest-repo: ${{ github.event.inputs.MANIFEST_REPO }}
-        manifest-branch: ${{ github.event.inputs.MANIFEST_BRANCH }}
-    - name: Upload recovery image
-      uses: actions/upload-artifact@v3
-      with:
-        path: out/target/product/${{ github.event.inputs.DEVICE_NAME }}
-        name: TWRP_Device_Tree-${{ github.run_id }}
+      - uses: actions/checkout@v3
+      - name: Download Device Tree
+        uses: actions/download-artifact@v3
+        with:
+          name: TWRP_Device_Tree-${{ github.run_id }}
+          path: device
+      - name: Check Device Tree
+        run: |
+          ls -R device/
+      - name: Build recovery image
+        uses: ./.github/actions/build-recovery-image
+        with:
+          device-name: ${{ github.event.inputs.DEVICE_NAME }}
+          manifest-repo: ${{ github.event.inputs.MANIFEST_REPO }}
+          manifest-branch: ${{ github.event.inputs.MANIFEST_BRANCH }}
+      - name: Upload recovery image
+        uses: actions/upload-artifact@v3
+        with:
+          path: out/target/product/${{ github.event.inputs.DEVICE_NAME }}
+          name: TWRP_Device_Tree-${{ github.run_id }}
